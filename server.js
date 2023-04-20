@@ -25,24 +25,24 @@ server.listen(3000,'127.0.0.1'||'localhost',function() {
     console.log('Aplicacion NodeJs id=>'+process.pid+' puerto =>'+port+' iniciando...');
 });
 
-/* app.get('/', (req, res)=> {
+app.use((err, req, res, next)=>{
+    console.log(err);
+    res.status(err.status || 500).send(err.stack);
+});
 
-    res.sendFile('Ruta raiz del backend');
+app.get('/', (req, res)=> {
+
+    res.send('Ruta raiz del backend');
 
 });
 
 app.get('/una', (req, res)=> {
 
-    res.sendFile('Ruta una del backend');
+    res.send('Ruta una del backend');
 
-});  */
+});
 
 //Manejo de errores
-
-app.use((err, req, res, next)=>{
-    console.log(err);
-    res.status(err.status || 500).send(err.stack);
-});
 
 module.exports = {
     app: app,
